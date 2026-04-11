@@ -46,6 +46,12 @@ Without env vars, the app still renders and the booking endpoint works in demo m
 - `/dashboard`
 - `/book/bookify-studio`
 
+## Stripe checkout
+
+The pricing cards post to `/api/checkout`, which creates a Stripe Checkout Session
+in subscription mode. Add `STRIPE_SECRET_KEY` to `.env.local` and Vercel before
+enabling live checkout.
+
 ## Credits
 
 - Hero photo by RDNE Stock project on Pexels.

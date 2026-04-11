@@ -40,6 +40,7 @@ const pricing = [
 export default async function Home() {
   const requestHeaders = await headers();
   const localizedPrices = getLocalizedPlanPrices(requestHeaders.get("x-vercel-ip-country"));
+  const checkoutEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
 
   return (
     <main className="bg-[#f4efe8] text-[#1b1712]">
@@ -198,6 +199,16 @@ export default async function Home() {
                     </div>
                   ))}
                 </div>
+                <form action="/api/checkout" method="post" className="mt-8">
+                  <input type="hidden" name="plan" value={plan.id} />
+                  <button
+                    disabled={!checkoutEnabled}
+                    type="submit"
+                    className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#1f1812] px-6 text-sm font-semibold text-white transition hover:bg-[#3c2d20] disabled:cursor-not-allowed disabled:bg-[#9a8f81]"
+                  >
+                    {checkoutEnabled ? `Subscribe to ${plan.name}` : "Checkout setup in progress"}
+                  </button>
+                </form>
               </article>
             ))}
           </div>
