@@ -39,8 +39,14 @@ export default function Home() {
   return (
     <main className="bg-[#f4efe8] text-[#1b1712]">
       <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.9),_transparent_38%),linear-gradient(135deg,_#0d0d0d_0%,_#271d16_55%,_#5e442a_100%)]" />
-        <div className="absolute inset-y-0 right-[-12%] hidden w-[42rem] rounded-full bg-[#e8c89a]/20 blur-3xl lg:block" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center opacity-55 mix-blend-luminosity"
+          style={{ backgroundImage: "url('/images/salon-hero.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,_rgba(8,8,8,0.92)_0%,_rgba(18,14,11,0.86)_44%,_rgba(72,50,29,0.88)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_34%),radial-gradient(circle_at_85%_20%,_rgba(232,200,154,0.18),_transparent_28%)]" />
+        <div className="absolute inset-y-0 right-[-12%] hidden w-[42rem] rounded-full bg-[#e8c89a]/15 blur-3xl lg:block" />
         <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-14 pt-6 sm:px-10 lg:px-12">
           <header className="flex items-center justify-between">
             <BookifyLogo tone="light" />

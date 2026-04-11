@@ -46,6 +46,10 @@ Without env vars, the app still renders and the booking endpoint works in demo m
 - `/dashboard`
 - `/book/bookify-studio`
 
+## Credits
+
+- Hero photo by RDNE Stock project on Pexels.
+
 ## Deploy to Vercel
 
 1. Push the repo to GitHub.
