@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { ArrowRight, CalendarRange, Clock3, ShieldCheck, Sparkles } from "lucide-react";
 import { BookifyLogo } from "@/components/bookify-logo";
+import { formatPlanPrice, getLocalizedPlanPrices } from "@/lib/pricing";
 
 const features = [
   {
@@ -22,20 +24,23 @@ const features = [
 
 const pricing = [
   {
+    id: "starter" as const,
     name: "Starter",
-    price: "£19",
     description: "For solo professionals who need fast setup and a polished booking page.",
     items: ["1 business profile", "Unlimited services", "Public booking link", "Email capture"],
   },
   {
+    id: "growth" as const,
     name: "Growth",
-    price: "£39",
     description: "For busier teams that want stronger scheduling control and more visibility.",
     items: ["Everything in Starter", "Multi-staff ready structure", "Priority support", "Expanded reporting hooks"],
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const requestHeaders = await headers();
+  const localizedPrices = getLocalizedPlanPrices(requestHeaders.get("x-vercel-ip-country"));
+
   return (
     <main className="bg-[#f4efe8] text-[#1b1712]">
       <section className="relative isolate overflow-hidden">
@@ -180,7 +185,9 @@ export default function Home() {
               <article key={plan.name} className="rounded-[2rem] bg-[#fffaf3] p-8 shadow-[0_18px_50px_rgba(39,29,21,0.08)]">
                 <p className="text-sm uppercase tracking-[0.3em] text-[#8b7157]">{plan.name}</p>
                 <div className="mt-5 flex items-end gap-3">
-                  <span className="text-5xl font-semibold tracking-tight text-[#1f1812]">{plan.price}</span>
+                  <span className="text-5xl font-semibold tracking-tight text-[#1f1812]">
+                    {formatPlanPrice(localizedPrices[plan.id])}
+                  </span>
                   <span className="pb-2 text-sm text-[#776a5d]">per month</span>
                 </div>
                 <p className="mt-5 max-w-lg text-sm leading-7 text-[#66594d]">{plan.description}</p>
@@ -194,6 +201,10 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <p className="mt-6 max-w-2xl text-sm leading-7 text-[#776a5d]">
+            Prices are localized estimates based on visitor region. Subscription checkout is not
+            connected yet.
+          </p>
         </div>
       </section>
 
