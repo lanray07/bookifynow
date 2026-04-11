@@ -59,6 +59,9 @@ export default async function Home() {
             <nav className="hidden items-center gap-8 text-sm text-white/72 md:flex">
               <a href="#features">Features</a>
               <a href="#pricing">Pricing</a>
+              <Link href="/book" className="transition hover:text-white">
+                Find a booking
+              </Link>
               <Link
                 href="/login"
                 className="rounded-full border border-white/20 px-5 py-2 text-white transition hover:bg-white/10"
@@ -90,10 +93,10 @@ export default async function Home() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/book/bookify-studio"
+                  href="/book"
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm font-semibold text-white transition hover:bg-white/10"
                 >
-                  See booking page
+                  Book an appointment
                 </Link>
               </div>
             </div>

@@ -49,6 +49,11 @@ export type DashboardData = BookingPageData & {
   bookings: Booking[];
 };
 
+export type BusinessDirectoryItem = BusinessProfile & {
+  serviceCount: number;
+  startingPrice: number | null;
+};
+
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function mapBusiness(row: BusinessRow): BusinessProfile {
@@ -245,6 +250,92 @@ export async function getBookingPageData(slug: string): Promise<BookingPageData 
     services: (services ?? []).map((service) => mapService(service as ServiceRow)),
     workingHours: (workingHours ?? []).map((entry) => mapWorkingHour(entry as WorkingHourRow)),
   };
+}
+
+export async function getBusinessDirectoryData(query?: string): Promise<BusinessDirectoryItem[]> {
+  const supabase = createSupabaseServerClient();
+  const normalizedQuery = query?.trim().toLowerCase();
+
+  if (!supabase) {
+    const serviceMatches = demoServices.some((service) =>
+      [service.name, service.description].some((value) => value.toLowerCase().includes(normalizedQuery ?? "")),
+    );
+    const businessMatches = [demoBusiness.name, demoBusiness.category, demoBusiness.location].some((value) =>
+      value.toLowerCase().includes(normalizedQuery ?? ""),
+    );
+
+    if (normalizedQuery && !businessMatches && !serviceMatches) {
+      return [];
+    }
+
+    return [
+      {
+        ...demoBusiness,
+        serviceCount: demoServices.length,
+        startingPrice: Math.min(...demoServices.map((service) => service.price)),
+      },
+    ];
+  }
+
+  await ensureDemoBusiness();
+
+  const { data: businesses, error: businessError } = await supabase
+    .from("businesses")
+    .select("id, name, slug, category, tagline, description, location")
+    .order("created_at", { ascending: false });
+
+  logSupabaseError("directory business fetch", businessError);
+
+  if (!businesses?.length) {
+    return [];
+  }
+
+  const businessIds = businesses.map((business) => business.id);
+  const { data: services, error: servicesError } = await supabase
+    .from("services")
+    .select("business_id, name, description, price_gbp")
+    .in("business_id", businessIds);
+
+  logSupabaseError("directory service fetch", servicesError);
+
+  const directoryItems = businesses.map((business) => {
+      const businessServices = (services ?? []).filter((service) => service.business_id === business.id);
+      const prices = businessServices.map((service) => Number(service.price_gbp));
+
+      return {
+        ...mapBusiness(business as BusinessRow),
+        serviceCount: businessServices.length,
+        startingPrice: prices.length ? Math.min(...prices) : null,
+        serviceSearchText: businessServices
+          .map((service) => `${service.name ?? ""} ${service.description ?? ""}`)
+          .join(" "),
+      };
+    });
+
+  const matchingItems = normalizedQuery
+    ? directoryItems.filter((business) =>
+        [
+          business.name,
+          business.category,
+          business.location,
+          business.tagline,
+          business.description,
+          business.serviceSearchText,
+        ].some((value) => value.toLowerCase().includes(normalizedQuery)),
+      )
+    : directoryItems;
+
+  return matchingItems.map((business) => ({
+    category: business.category,
+    description: business.description,
+    id: business.id,
+    location: business.location,
+    name: business.name,
+    serviceCount: business.serviceCount,
+    slug: business.slug,
+    startingPrice: business.startingPrice,
+    tagline: business.tagline,
+  }));
 }
 
 export async function getDashboardData(ownerId?: string): Promise<DashboardData> {
