@@ -52,7 +52,7 @@ export default function Home() {
                 href="/login"
                 className="rounded-full border border-white/20 px-5 py-2 text-white transition hover:bg-white/10"
               >
-                Signup
+                Log in
               </Link>
             </nav>
           </header>
@@ -61,22 +61,21 @@ export default function Home() {
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs uppercase tracking-[0.35em] text-white/70">
                 <Sparkles className="h-4 w-4" />
-                SaaS booking system
+                Online booking for local pros
               </span>
               <h1 className="mt-8 text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-                Bookings for beauty businesses that want less admin and more flow.
+                Take bookings online while you focus on the chair, station, or studio.
               </h1>
               <p className="mt-6 max-w-xl text-base leading-8 text-white/72 sm:text-lg">
-                BookifyNow gives barbers, salons, and beauty professionals a mobile-friendly
-                booking page, a clean admin dashboard, and a Supabase-backed foundation ready for
-                Vercel.
+                BookifyNow gives barbers, salons, and beauty professionals a public booking page,
+                service management, working hours, and a private dashboard for every appointment.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <Link
                   href="/login"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#f5ead9] px-6 text-sm font-semibold text-[#1b1712] transition hover:bg-white"
                 >
-                  Signup
+                  Get started
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
@@ -195,22 +194,22 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
         <div className="rounded-[2.5rem] bg-[#1a140f] px-8 py-10 text-white sm:px-12 sm:py-14">
-          <p className="text-xs uppercase tracking-[0.35em] text-white/45">Ready to launch</p>
+          <p className="text-xs uppercase tracking-[0.35em] text-white/45">Ready for bookings</p>
           <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-                Launch BookifyNow on `bookifynow.com` with Next.js, Supabase, and Vercel.
+                Start taking bookings on bookifynow.com with a clean page and simple dashboard.
               </h2>
               <p className="mt-4 text-sm leading-7 text-white/68 sm:text-base">
-                The project is structured so you can plug in Supabase credentials, deploy to Vercel,
-                and expand from the starter flows without reworking the foundation.
+                Create an owner account, set your services and hours, then share your public
+                booking link with clients.
               </p>
             </div>
             <Link
               href="/login"
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f5ead9] px-6 text-sm font-semibold text-[#1b1712] transition hover:bg-white"
             >
-              Open dashboard
+              Get started
             </Link>
           </div>
         </div>
