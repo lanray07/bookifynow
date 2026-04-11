@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { BookifyLogo } from "@/components/bookify-logo";
 import { createSupabaseAuthBrowserClient } from "@/lib/supabase-auth-client";
 
 export function AuthForm() {
@@ -60,7 +61,7 @@ export function AuthForm() {
       className="mx-auto grid w-full max-w-md gap-5 rounded-[2rem] border border-[#e3d7c7] bg-[#fffaf3] p-6 shadow-[0_20px_70px_rgba(39,29,21,0.10)] sm:p-8"
     >
       <div>
-        <p className="text-xs uppercase tracking-[0.35em] text-[#8b7157]">BookifyNow</p>
+        <BookifyLogo />
         <h1 className="mt-4 text-4xl font-semibold tracking-tight text-[#1f1812]">
           {mode === "login" ? "Owner login" : "Create your owner account"}
         </h1>

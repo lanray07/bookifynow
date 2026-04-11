@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { BookifyLogo } from "@/components/bookify-logo";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { createSupabaseAuthServerClient } from "@/lib/supabase-auth-server";
 import { getDashboardData } from "@/lib/supabase-data";
@@ -22,7 +23,7 @@ export default async function DashboardPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 rounded-[2rem] bg-[#1b1712] px-6 py-8 text-white shadow-[0_18px_60px_rgba(31,24,18,0.18)] sm:px-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.35em] text-white/45">BookifyNow dashboard</p>
+            <BookifyLogo tone="light" />
             <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
               Create your profile, manage services, and control bookings from one place.
             </h1>

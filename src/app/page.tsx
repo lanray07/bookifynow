@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, CalendarRange, Clock3, ShieldCheck, Sparkles } from "lucide-react";
+import { BookifyLogo } from "@/components/bookify-logo";
 
 const features = [
   {
@@ -42,9 +43,7 @@ export default function Home() {
         <div className="absolute inset-y-0 right-[-12%] hidden w-[42rem] rounded-full bg-[#e8c89a]/20 blur-3xl lg:block" />
         <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-14 pt-6 sm:px-10 lg:px-12">
           <header className="flex items-center justify-between">
-            <Link href="/" className="text-lg font-semibold tracking-[0.2em] text-white">
-              BOOKIFYNOW
-            </Link>
+            <BookifyLogo tone="light" />
             <nav className="hidden items-center gap-8 text-sm text-white/72 md:flex">
               <a href="#features">Features</a>
               <a href="#pricing">Pricing</a>
