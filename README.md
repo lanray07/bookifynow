@@ -29,8 +29,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 1. Create a Supabase project.
 2. Run [`supabase/schema.sql`](/C:/Users/User/Documents/Bookifynow/supabase/schema.sql) in the SQL editor.
-3. Copy [`.env.example`](/C:/Users/User/Documents/Bookifynow/.env.example) to `.env.local`.
-4. Add:
+3. Run [`supabase/rls.sql`](/C:/Users/User/Documents/Bookifynow/supabase/rls.sql) to enable Row Level Security.
+4. Copy [`.env.example`](/C:/Users/User/Documents/Bookifynow/.env.example) to `.env.local`.
+5. Add:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=...

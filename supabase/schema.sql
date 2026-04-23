@@ -56,3 +56,9 @@ create table if not exists bookings (
 
 create index if not exists bookings_business_slug_date_idx
   on bookings (business_slug, booking_date, booking_time);
+
+alter table users enable row level security;
+alter table businesses enable row level security;
+alter table services enable row level security;
+alter table working_hours enable row level security;
+alter table bookings enable row level security;
